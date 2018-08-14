@@ -19,9 +19,22 @@ def draw_letters()
   return ten_letters
 end
 
-print draw_letters
+# puts "Here are your letters: #{draw_letters}"
 
-# def uses_available_letters?(input, letters_in_hand)
-#
-#   return
-# end
+# puts "Give us a word from your letters: "
+# user_input = gets.chomp.to_s.upcase
+
+def uses_available_letters?(input, letters_in_hand)
+
+  # letters_in_hand.split(//)
+  checking = input.split(//)
+# puts checking.include?("D")
+  letters_in_hand.each do |letter|
+   unless !(checking.include?(letter))
+
+     return true
+   end
+ end
+end
+
+ # uses_available_letters?(user_input, draw_letters)
