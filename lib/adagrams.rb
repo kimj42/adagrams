@@ -30,11 +30,12 @@ def uses_available_letters?(input, letters_in_hand)
   checking = input.split(//)
 # puts checking.include?("D")
   letters_in_hand.each do |letter|
-   unless !(checking.include?(letter))
-
-     return true
-   end
- end
+    unless !(checking.include?(letter))
+      return true
+    else
+      return false
+    end
+  end
 end
 
  # uses_available_letters?(user_input, draw_letters)
