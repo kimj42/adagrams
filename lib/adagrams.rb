@@ -19,6 +19,11 @@ def uses_available_letters?(input, letters_in_hand)
   # to see if they are included
   adagram.each do |letter|
     return false unless letters_in_hand.include?(letter)
+
+    # check for repeated letters more than in drawn letters
+    if letters_in_hand.include?(letter)
+      letters_in_hand.delete(letter)
+    end
   end
 
   return true
