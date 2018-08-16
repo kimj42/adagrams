@@ -69,14 +69,36 @@ def highest_score_from(words)
   end
 
   # stores word with highest score in a hash of its own
-  best_word = Hash.new
-  words_with_scores.select do |word, score|
+  best_word = []
+
+  words_with_scores.each do |word, score|
     if score == words_with_scores.values.max
-      best_word[:word] = word
-      best_word[:score] = score
+      new_word = Hash.new
+      new_word[:word] = word
+      new_word[:score] = score
+      best_word << new_word
     end
   end
 
+  if best_word.length >= 2
+    base_score = best_word[0][:word]
+    make_base_number = base_score.length
+
+    best_word.each do |letters|
+      word = letters[:word]
+      letter_count = word.length
+
+      if letter_count < make_base_number
+        make_base_number = letter_count
+        base_score = word
+      end
+    end
+
+    final_answer = {:word => base_score, :score => score_word(base_score)}
+    return final_answer
+
+  end
+
   # displays the hash that has the best word and score
-  return best_word
+  return best_word.first
 end
