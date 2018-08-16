@@ -53,5 +53,30 @@ def score_word(word)
    end
      return total_score
 end
- # final_score = score_word("")
- # puts "#{final_score}"
+
+# finds highest score from given words
+def highest_score_from(words)
+
+  # calculates the score of each word
+  score_of_each_word = words.map do |word|
+    score_word(word)
+  end
+
+  # stores the word and its score in a hash
+  words_with_scores = Hash.new
+  words.zip(score_of_each_word).each do |word, score|
+    words_with_scores[word] = score
+  end
+
+  # stores word with highest score in a hash of its own
+  best_word = Hash.new
+  words_with_scores.select do |word, score|
+    if score == words_with_scores.values.max
+      best_word[:word] = word
+      best_word[:score] = score
+    end
+  end
+
+  # displays the hash that has the best word and score
+  return best_word
+end
