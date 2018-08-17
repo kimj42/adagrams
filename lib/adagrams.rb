@@ -34,6 +34,7 @@ def score_word(word)
    {
      "A" => 1, "E" => 1, "I" => 1, "O" => 1, "U" => 1, "L" => 1, "N" => 1, "R" => 1, "S" => 1, "T" => 1, "D" => 2, "G" => 2, "B" => 3, "C" => 3, "M" => 3, "P" => 3, "F" => 4, "H" => 4, "V" => 4, "W" => 4, "Y" => 4, "K" => 5, "J" => 8, "X" => 8, "Q" => 10, "Z" => 10
    }
+
    #Find the sum of letters passed into the method
    total_score = 0
 
@@ -44,6 +45,8 @@ def score_word(word)
      total_score += score_chart[character]
    end
 
+   # adds 8 points to total score if given word
+   # is more than 7 letters
    if letters.length >= 7
      total_score = total_score + 8
    end
@@ -67,6 +70,9 @@ def highest_score_from(words)
   # stores word with highest score in a hash of its own
   highest_score_words = []
 
+  # creates new hash that contains the given word
+  # and its score only if the score has the
+  # highest score
   words_with_scores.each do |word, score|
     if score == words_with_scores.values.max
       best_word = Hash.new
@@ -76,17 +82,29 @@ def highest_score_from(words)
     end
   end
 
+  # if 2 or more words have the same high score
+  # all those words will be compared to the first
+  # best scoring word
   if highest_score_words.length >= 2
     best_scoring_word = highest_score_words[0][:word]
     number_of_letters_of_best_word = best_scoring_word.length
 
+    # looks at the first word and counts the number of letters
+    # use that first word to compare to the rest of the words
     highest_score_words.each do |letters|
       word = letters[:word]
       letter_count = word.length
 
+      #
       if letter_count < number_of_letters_of_best_word
         number_of_letters_of_best_word = letter_count
         best_scoring_word = word
+      elsif
+        letter_count == 10
+        number_of_letters_of_best_word = letter_count
+        best_scoring_word = word
+        final_answer = {:word => best_scoring_word, :score => score_word(best_scoring_word)}
+        return final_answer
       end
     end
 
