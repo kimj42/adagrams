@@ -1,11 +1,6 @@
 # chooses 10 letters randomly from the letter bag
-# require 'minitest/spec'
-# require 'minitest/autorun'
-# require 'pry'
-
 def draw_letters()
   letter_bag = ["A", "A", "A", "A", "A", "A", "A", "A", "A", "B", "B", "C", "C", "D", "D", "D", "D", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "F", "F", "G", "G", "G", "H", "H", "I", "I", "I", "I", "I", "I", "I", "I", "I", "J", "K", "L", "L", "L", "L", "M", "M", "N", "N", "N", "N", "N", "N", "O", "O", "O", "O", "O", "O", "O", "O", "P", "P", "Q", "R", "R", "R", "R", "R", "R", "S", "S", "S", "S", "T", "T", "T", "T", "T", "T", "U", "U", "U", "U", "V", "V", "W", "W", "X", "Y", "Y", "Z"]
-
 
   # randomly selects the letters
   ten_letters = letter_bag.sample(10)
@@ -41,6 +36,7 @@ def score_word(word)
    }
    #Find the sum of letters passed into the method
    total_score = 0
+
    #split up the word and put into an array to iterate
    #make all letters caps
    letters = word.upcase.split('')
@@ -69,36 +65,35 @@ def highest_score_from(words)
   end
 
   # stores word with highest score in a hash of its own
-  best_word = []
+  highest_score_words = []
 
   words_with_scores.each do |word, score|
     if score == words_with_scores.values.max
-      new_word = Hash.new
-      new_word[:word] = word
-      new_word[:score] = score
-      best_word << new_word
+      best_word = Hash.new
+      best_word[:word] = word
+      best_word[:score] = score
+      highest_score_words << best_word
     end
   end
 
-  if best_word.length >= 2
-    base_score = best_word[0][:word]
-    make_base_number = base_score.length
+  if highest_score_words.length >= 2
+    best_scoring_word = highest_score_words[0][:word]
+    number_of_letters_of_best_word = best_scoring_word.length
 
-    best_word.each do |letters|
+    highest_score_words.each do |letters|
       word = letters[:word]
       letter_count = word.length
 
-      if letter_count < make_base_number
-        make_base_number = letter_count
-        base_score = word
+      if letter_count < number_of_letters_of_best_word
+        number_of_letters_of_best_word = letter_count
+        best_scoring_word = word
       end
     end
 
-    final_answer = {:word => base_score, :score => score_word(base_score)}
+    final_answer = {:word => best_scoring_word, :score => score_word(best_scoring_word)}
     return final_answer
-
   end
 
   # displays the hash that has the best word and score
-  return best_word.first
+  return highest_score_words.first
 end
