@@ -95,7 +95,7 @@ def highest_score_from(words)
       word = letters[:word]
       letter_count = word.length
 
-      #
+      # considers ties, and chooses the word with the fewest lertters. If the tie contains words with 10 letters, that will be the best scoring word, regardless of order.
       if letter_count < number_of_letters_of_best_word
         number_of_letters_of_best_word = letter_count
         best_scoring_word = word
@@ -112,6 +112,6 @@ def highest_score_from(words)
     return final_answer
   end
 
-  # displays the hash that has the best word and score
+  # displays the hash that has the best word and score. returns the first word in case if a tie with the same length
   return highest_score_words.first
 end
